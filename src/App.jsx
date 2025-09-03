@@ -5,15 +5,19 @@ function App() {
     author: "",
     title: "",
     body: "",
-    isPublic: "",
+    isPublic: false,
   });
 
   const handleForm = (e) => {
     // formData[e.target.name] = e.target.value
     // setFormData({...formData})
-    setFormData({...formData, [e.target.name]: e.target.value})
+
+    setFormData({
+      ...formData,
+      [e.target.name]:
+        e.target.type === "checkbox" ? e.target.checked : e.targetvalue,
+    });
   };
-    
 
   return (
     <div className="container my-5">
@@ -67,7 +71,7 @@ function App() {
                     type="checkbox"
                     id="isPublic"
                     name="isPublic"
-                    value={formData.isPublic}
+                    checked={formData.isPublic}
                     onChange={handleForm}
                     className="form-check-input"
                   />
