@@ -1,6 +1,20 @@
 import { useState } from "react";
 
 function App() {
+  const [formData, setFormData] = useState({
+    author: "",
+    title: "",
+    body: "",
+    isPublic: "",
+  });
+
+  const handleForm = (e) => {
+    // formData[e.target.name] = e.target.value
+    // setFormData({...formData})
+    setFormData({...formData, [e.target.name]: e.target.value})
+  };
+    
+
   return (
     <div className="container my-5">
       <div className="row my-3 border border-dark rounded p-3">
@@ -14,6 +28,8 @@ function App() {
                   id="author"
                   name="author"
                   className="form-control"
+                  value={formData.author}
+                  onChange={handleForm}
                   placeholder="Inserisci l'autore"
                 />
               </div>
@@ -25,6 +41,8 @@ function App() {
                   id="title"
                   name="title"
                   className="form-control"
+                  value={formData.title}
+                  onChange={handleForm}
                   placeholder="Inserisci il titolo"
                 />
               </div>
@@ -36,6 +54,8 @@ function App() {
                   id="body"
                   name="body"
                   className="form-control"
+                  value={formData.body}
+                  onChange={handleForm}
                   placeholder="Inserisci il contenuto"
                 />
               </div>
@@ -47,6 +67,8 @@ function App() {
                     type="checkbox"
                     id="isPublic"
                     name="isPublic"
+                    value={formData.isPublic}
+                    onChange={handleForm}
                     className="form-check-input"
                   />
                   <label className="form-check-label">
@@ -67,11 +89,11 @@ function App() {
         <div className="col-4 my-2">
           <div className="card">
             <div className="card-header">
-              <h2>autore</h2>
+              <h2>{formData.author}</h2>
             </div>
             <div className="card-body">
-              <h2>titolo</h2>
-              <p>descrizione</p>
+              <h2>{formData.title}</h2>
+              <p>{formData.body}</p>
             </div>
           </div>
         </div>
