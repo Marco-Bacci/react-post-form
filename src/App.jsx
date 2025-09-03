@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -19,11 +20,18 @@ function App() {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post(" https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData).then((resp)=>{
+      console.log("Dati inviati" + resp.data)
+    })
+  };
+
   return (
     <div className="container my-5">
       <div className="row my-3 border border-dark rounded p-3">
         <div className="col-8">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="row border border-dark rounded">
               <div className="col-12 my-2">
                 <label className="form-label">Autore del post</label>
