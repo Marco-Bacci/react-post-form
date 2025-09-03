@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import BusinessCard from "../components/BusinessCard";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -16,15 +17,17 @@ function App() {
     setFormData({
       ...formData,
       [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.targetvalue,
+        e.target.type === "checkbox" ? e.target.checked : e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(" https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData).then((resp)=>{
-      console.log("Dati inviati" + resp.data)
-    })
+    axios
+      .post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
+      .then((resp) => {
+        console.log("Dati inviati" + resp.data);
+      });
   };
 
   return (
@@ -97,18 +100,9 @@ function App() {
             </div>
           </form>
         </div>
+
         {/* CARD*/}
-        <div className="col-4 my-2">
-          <div className="card">
-            <div className="card-header">
-              <h2>{formData.author}</h2>
-            </div>
-            <div className="card-body">
-              <h2>{formData.title}</h2>
-              <p>{formData.body}</p>
-            </div>
-          </div>
-        </div>
+        <BusinessCard data={formData} />
       </div>
     </div>
   );
