@@ -9,6 +9,8 @@ function App() {
     body: "",
     isPublic: false,
   });
+  // bonus
+  const [alert, setAlert] = useState({ show: false, status: "", text: "" });
 
   const handleForm = (e) => {
     // formData[e.target.name] = e.target.value
@@ -26,12 +28,32 @@ function App() {
     axios
       .post("https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts", formData)
       .then((resp) => {
-        console.log("Dati inviati" + resp.data);
+        console.log("Dati inviati");
+        setFormData({
+          author: "",
+          title: "",
+          body: "",
+          isPublic: false,
+        });
+        setAlert({
+          show: true,
+          status: "success",
+          text: "richiesta inviata con successo",
+        });
+      })
+      .catch((err) => {
+        console.log("Errore nell'invio dei dati:" + err);
+        setAlert({
+          show: true,
+          status: "error",
+          text: "Errore nell'invio della richiesta",
+        });
       });
   };
 
   return (
     <div className="container my-5">
+      {alert.show && <div className="alert">{alert.text}</div>}
       <div className="row my-3 border border-dark rounded p-3">
         <div className="col-8">
           <form onSubmit={handleSubmit}>
