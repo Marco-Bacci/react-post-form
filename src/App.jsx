@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="container my-5">
-      {alert.show && <div className="alert">{alert.text}</div>}
+      {alert.show && <span className="bg-danger mb-3 p-2 ">{alert.text}</span>}
       <div className="row my-3 border border-dark rounded p-3">
         <div className="col-8">
           <form onSubmit={handleSubmit}>
